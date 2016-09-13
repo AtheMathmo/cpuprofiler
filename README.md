@@ -30,7 +30,7 @@ Add `cpuprofiler` to your `Cargo.toml` manifest.
 
 ```
 [dependencies]
-cpuprofiler = "0.0.1"
+cpuprofiler = "0.0.2"
 ```
 
 Add the dependency to your root:
@@ -42,7 +42,7 @@ extern crate cpuprofiler;
 Start and stop the profiler around the code you'd like to draw samples.
 This will save the profile to a file you specify.
 
-```
+```rust
 use cpuprofiler::PROFILER;
 
 PROFILER.lock().unwrap().start("./my-prof.profile");
@@ -97,3 +97,8 @@ In the above we see that there were 513 samples in the `compute_grad` function a
 - Better crate documentation
 - Expose other functions from google's cpuprofiler. This allows more options, status checks and more.
 - Can we write a sampling profiler in Rust?!
+- Integration with cargo-profiler?
+
+## License
+
+This project has a BSD license to match the gperftools license. Which makes sense, I think?
