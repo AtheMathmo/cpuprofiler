@@ -3,6 +3,12 @@ name = "cpuprofiler"
 version = "0.0.1"
 authors = ["james <LucasJ94@hotmail.co.uk>"]
 
+description = "Bindings to google's cpu profiler"
+repository = "https://github.com/AtheMathmo/cpuprofiler"
+keywords = ["cpu", "profiler", "cpuprofiler"]
+readme = "README.md"
+license = "BSD-2-Clause"
+
 [dependencies]
 lazy_static = "0.2.1"
 error-chain = "0.5.0"
