@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `PROFILER` struct in crate `cpuprofiler`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, PROFILER">
+
+    <title>cpuprofiler::PROFILER - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'><a href='index.html'>cpuprofiler</a></p><script>window.sidebarCurrent = {name: 'PROFILER', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content struct">
+<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>cpuprofiler</a>::<wbr><a class='struct' href=''>PROFILER</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span></span></h1>
+<pre class='rust struct'>pub struct PROFILER {
+    // some fields omitted
+}</pre><div class='docblock'><p>Static reference to the PROFILER</p>
+
+<p>The cpuprofiler library only supports one active profiler.
+Because of this we must use static access and wrap in a <code>Mutex</code>.</p>
+</div><h2 id='deref-methods'>Methods from <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Deref.html' title='core::ops::Deref'>__Deref</a>&lt;Target=<a class='struct' href='https://doc.rust-lang.org/nightly/std/sync/mutex/struct.Mutex.html' title='std::sync::mutex::Mutex'>Mutex</a>&lt;<a class='struct' href='../cpuprofiler/struct.Profiler.html' title='cpuprofiler::Profiler'>Profiler</a>&gt;&gt;</h2><div class='impl-items'></div><div class='impl-items'><h4 id='method.lock' class='method'><code>fn <a href='#method.lock' class='fnname'>lock</a>(&amp;self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/std/sync/mutex/struct.MutexGuard.html' title='std::sync::mutex::MutexGuard'>MutexGuard</a>&lt;T&gt;,&nbsp;<a class='struct' href='https://doc.rust-lang.org/nightly/std/sys_common/poison/struct.PoisonError.html' title='std::sys_common::poison::PoisonError'>PoisonError</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/std/sync/mutex/struct.MutexGuard.html' title='std::sync::mutex::MutexGuard'>MutexGuard</a>&lt;T&gt;&gt;&gt;</code><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div></h4>
+<div class='docblock'><p>Acquires a mutex, blocking the current thread until it is able to do so.</p>
+
+<p>This function will block the local thread until it is available to acquire
+the mutex. Upon returning, the thread is the only thread with the mutex
+held. An RAII guard is returned to allow scoped unlock of the lock. When
+the guard goes out of scope, the mutex will be unlocked.</p>
+
+<p>The exact behavior on locking a mutex in the thread which already holds
+the lock is left unspecified. However, this function will not return on
+the second call (it might panic or deadlock, for example).</p>
+
+<h1 id='errors' class='section-header'><a href='#errors'>Errors</a></h1>
+<p>If another user of this mutex panicked while holding the mutex, then
+this call will return an error once the mutex is acquired.</p>
+
+<h1 id='panics' class='section-header'><a href='#panics'>Panics</a></h1>
+<p>This function might panic when called if the lock is already held by
+the current thread.</p>
+</div><h4 id='method.try_lock' class='method'><code>fn <a href='#method.try_lock' class='fnname'>try_lock</a>(&amp;self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/std/sync/mutex/struct.MutexGuard.html' title='std::sync::mutex::MutexGuard'>MutexGuard</a>&lt;T&gt;,&nbsp;<a class='enum' href='https://doc.rust-lang.org/nightly/std/sys_common/poison/enum.TryLockError.html' title='std::sys_common::poison::TryLockError'>TryLockError</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/std/sync/mutex/struct.MutexGuard.html' title='std::sync::mutex::MutexGuard'>MutexGuard</a>&lt;T&gt;&gt;&gt;</code><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div></h4>
+<div class='docblock'><p>Attempts to acquire this lock.</p>
+
+<p>If the lock could not be acquired at this time, then <code>Err</code> is returned.
+Otherwise, an RAII guard is returned. The lock will be unlocked when the
+guard is dropped.</p>
+
+<p>This function does not block.</p>
+
+<h1 id='errors-1' class='section-header'><a href='#errors-1'>Errors</a></h1>
+<p>If another user of this mutex panicked while holding the mutex, then
+this call will return failure if the mutex would otherwise be
+acquired.</p>
+</div><h4 id='method.is_poisoned' class='method'><code>fn <a href='#method.is_poisoned' class='fnname'>is_poisoned</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code><div class='since' title='Stable since Rust version 1.2.0'>1.2.0</div></h4>
+<div class='docblock'><p>Determines whether the lock is poisoned.</p>
+
+<p>If another thread is active, the lock can still become poisoned at any
+time.  You should not trust a <code>false</code> value for program correctness
+without additional synchronization.</p>
+</div><h4 id='method.into_inner' class='method'><code>fn <a href='#method.into_inner' class='fnname'>into_inner</a>(self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;T,&nbsp;<a class='struct' href='https://doc.rust-lang.org/nightly/std/sys_common/poison/struct.PoisonError.html' title='std::sys_common::poison::PoisonError'>PoisonError</a>&lt;T&gt;&gt;</code><div class='since' title='Stable since Rust version 1.6.0'>1.6.0</div></h4>
+<div class='docblock'><p>Consumes this mutex, returning the underlying data.</p>
+
+<h1 id='errors-2' class='section-header'><a href='#errors-2'>Errors</a></h1>
+<p>If another user of this mutex panicked while holding the mutex, then
+this call will return an error instead.</p>
+</div><h4 id='method.get_mut' class='method'><code>fn <a href='#method.get_mut' class='fnname'>get_mut</a>(&amp;mut self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;&amp;mut T,&nbsp;<a class='struct' href='https://doc.rust-lang.org/nightly/std/sys_common/poison/struct.PoisonError.html' title='std::sys_common::poison::PoisonError'>PoisonError</a>&lt;&amp;mut T&gt;&gt;</code><div class='since' title='Stable since Rust version 1.6.0'>1.6.0</div></h4>
+<div class='docblock'><p>Returns a mutable reference to the underlying data.</p>
+
+<p>Since this call borrows the <code>Mutex</code> mutably, no actual locking needs to
+take place---the mutable borrow statically guarantees no locks exist.</p>
+
+<h1 id='errors-3' class='section-header'><a href='#errors-3'>Errors</a></h1>
+<p>If another user of this mutex panicked while holding the mutex, then
+this call will return an error instead.</p>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='struct' href='../cpuprofiler/struct.PROFILER.html' title='cpuprofiler::PROFILER'>PROFILER</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-182' class='srclink' href='../src/cpuprofiler/src/lib.rs.html#59' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+<div class='docblock'><p>Formats the value using the given formatter.</p>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Deref.html' title='core::ops::Deref'>__Deref</a> for <a class='struct' href='../cpuprofiler/struct.PROFILER.html' title='cpuprofiler::PROFILER'>PROFILER</a></code></span><span class='out-of-band'></span></h3>
+<div class='impl-items'><h4 id='associatedtype.Target' class='type'><code>type <a href='https://doc.rust-lang.org/nightly/core/ops/trait.Deref.html#associatedtype.Target' class='type'>Target</a> = <a class='struct' href='https://doc.rust-lang.org/nightly/std/sync/mutex/struct.Mutex.html' title='std::sync::mutex::Mutex'>Mutex</a>&lt;<a class='struct' href='../cpuprofiler/struct.Profiler.html' title='cpuprofiler::Profiler'>Profiler</a>&gt;</code></h4>
+<div class='docblock'><p>The resulting type after dereferencing</p>
+</div><h4 id='method.deref' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/trait.Deref.html#tymethod.deref' class='fnname'>deref</a>&lt;'a&gt;(&amp;'a self) -&gt; &amp;'a <a class='struct' href='https://doc.rust-lang.org/nightly/std/sync/mutex/struct.Mutex.html' title='std::sync::mutex::Mutex'>Mutex</a>&lt;<a class='struct' href='../cpuprofiler/struct.Profiler.html' title='cpuprofiler::Profiler'>Profiler</a>&gt;</code></h4>
+<div class='docblock'><p>The method called to dereference a value</p>
+</div></div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "cpuprofiler";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    
+    <script defer src="../search-index.js"></script>
+</body>
+</html>
