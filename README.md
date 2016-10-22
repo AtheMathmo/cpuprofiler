@@ -45,9 +45,9 @@ This will save the profile to a file you specify.
 ```rust
 use cpuprofiler::PROFILER;
 
-PROFILER.lock().unwrap().start("./my-prof.profile");
+PROFILER.lock().unwrap().start("./my-prof.profile").unwrap();
 // Code you want to sample goes here!
-PROFILER.lock().unwrap().stop();
+PROFILER.lock().unwrap().stop().unwrap();
 ```
 
 Now you can just run the code as you would normally. Once complete the profile will be saved to `./my-prof.profile`.
