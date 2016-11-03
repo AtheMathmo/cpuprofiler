@@ -43,9 +43,9 @@ mod error;
 
 use std::ffi::CString;
 use std::fmt;
-use std::fs;
-use std::io;
+use std::fs::File;
 use std::os::raw::c_char;
+use std::path::Path;
 
 use error::{Error, ErrorKind};
 
@@ -132,22 +132,15 @@ impl Profiler {
     pub fn start<T: Into<Vec<u8>>>(&mut self, fname: T) -> Result<(), Error> {
         if self.state == ProfilerState::NotActive {
             let c_fname = try!(CString::new(fname));
+            try!(check_file_path(c_fname.clone().into_string().unwrap()));
 
-            let metadata = try!(fs::metadata(try!(c_fname.to_str())));
-
-            if !metadata.is_file() {
-                Err(io::Error::new(io::ErrorKind::NotFound, "Invalid file for profile").into())
-            } else if metadata.permissions().readonly() {
-                Err(io::Error::new(io::ErrorKind::PermissionDenied, "File is readonly").into())
-            } else {
-                unsafe {
-                    let res = ProfilerStart(c_fname.as_ptr());
-                    if res == 0 {
-                        Err(ErrorKind::InternalError.into())
-                    } else {
-                        self.state = ProfilerState::Active;
-                        Ok(())
-                    }
+            unsafe {
+                let res = ProfilerStart(c_fname.as_ptr());
+                if res == 0 {
+                    Err(ErrorKind::InternalError.into())
+                } else {
+                    self.state = ProfilerState::Active;
+                    Ok(())
                 }
             }
         } else {
@@ -173,5 +166,14 @@ impl Profiler {
         } else {
             Err(ErrorKind::InvalidState(self.state).into())
         }
+    }
+}
+
+fn check_file_path<P: AsRef<Path>>(path: P) -> Result<(), Error> {
+    let write_res = File::create(path);
+
+    match write_res {
+        Ok(_) => Ok(()),
+        Err(e) => Err(e.into()),
     }
 }
