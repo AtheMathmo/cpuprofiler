@@ -30,7 +30,7 @@ Add `cpuprofiler` to your `Cargo.toml` manifest.
 
 ```
 [dependencies]
-cpuprofiler = "0.0.2"
+cpuprofiler = "0.0.3"
 ```
 
 Add the dependency to your root:
