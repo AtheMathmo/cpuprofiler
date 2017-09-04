@@ -39,7 +39,7 @@ extern crate error_chain;
 #[macro_use]
 extern crate lazy_static;
 
-mod error;
+pub mod error;
 
 use std::ffi::CString;
 use std::fmt;
