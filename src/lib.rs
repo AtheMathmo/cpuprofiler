@@ -31,7 +31,6 @@
 //! We limit access this way to ensure that only one profiler is running at a time -
 //! this is a limitation of the cpuprofiler library.
 
-#![deny(missing_docs)]
 #![warn(missing_debug_implementations)]
 
 #[macro_use]
@@ -39,7 +38,7 @@ extern crate error_chain;
 #[macro_use]
 extern crate lazy_static;
 
-mod error;
+pub mod error;
 
 use std::ffi::CString;
 use std::fmt;

@@ -7,9 +7,9 @@ use std::str;
 
 error_chain! {
     foreign_links {
-        io::Error, Io;
-        ffi::NulError, Nul;
-        str::Utf8Error, Utf8;
+        Io(io::Error);
+        Nul(ffi::NulError);
+        Utf8(str::Utf8Error);
     }
 
     errors {
