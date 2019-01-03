@@ -52,6 +52,8 @@ PROFILER.lock().unwrap().stop().unwrap();
 
 Now you can just run the code as you would normally. Once complete the profile will be saved to `./my-prof.profile`.
 
+If you are running 'cargo bench' or 'cargo test', look at the file name after "Running ...", that is the name of the binary you will need later.
+
 The final step is the fun part - analyzing the profile!
 
 ### Analyzing the profile
@@ -60,6 +62,12 @@ To analyze the profile we use google's [pprof](https://github.com/google/pprof) 
 
 An old version of this tool is included with the gperftools package. This is the version I have been using but the newer Go version should work too!
 The usage of pprof is well documented in the [cpuprofiler docs](http://goog-perftools.sourceforge.net/doc/cpu_profiler.html).
+
+A simple example of gperfotols pprof:
+
+```bash
+$ pprof --text ./target/release/deps/benchtest-faa85d8bee0d467d ./my-prof.profile
+```
 
 ## The Result
 
