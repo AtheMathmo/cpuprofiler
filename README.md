@@ -19,6 +19,7 @@ in their repository but it's roughly the following:
 1. Download package from [releases](https://github.com/gperftools/gperftools/releases)
 2. Run `./configure`
 3. Run `make install`
+4. Run `sudo ldconfig`
 
 There may be some other dependencies for your system - these are explained well in their
 [INSTALL](https://github.com/gperftools/gperftools/blob/master/INSTALL) document.
