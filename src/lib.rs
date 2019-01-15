@@ -61,7 +61,6 @@ lazy_static! {
     });
 }
 
-#[link(name = "profiler")]
 #[allow(non_snake_case)]
 extern "C" {
     fn ProfilerStart(fname: *const c_char) -> i32;
