@@ -11,4 +11,4 @@ license = "BSD-2-Clause"
 
 [dependencies]
 lazy_static = "1.0"
-error-chain = "0.10.0"
+error-chain = "0.12"
