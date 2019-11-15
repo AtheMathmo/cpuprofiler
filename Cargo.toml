@@ -1,6 +1,6 @@
 [package]
 name = "cpuprofiler"
-version = "0.0.3"
+version = "0.0.4"
 authors = ["james <LucasJ94@hotmail.co.uk>"]
 
 description = "Bindings to google's cpu profiler"
