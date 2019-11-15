@@ -5,7 +5,7 @@ This library provides bindings to google's [cpuprofiler](http://goog-perftools.s
 ## Why use this?
 
 There are other profiling tools for Rust, [cargo-profiler](https://github.com/pegasos1/cargo-profiler) is particularly good!
-This library certainly doesn't replace those but adds a some different tools to the mix:
+This library certainly doesn't replace those but adds some different tools to the mix:
 
 - Makes it easy to profile only sections of code
 - Uses statistical sampling (like [oprofiler](http://oprofile.sourceforge.net/news/)) which means low overhead
@@ -31,7 +31,7 @@ Add `cpuprofiler` to your `Cargo.toml` manifest.
 
 ```
 [dependencies]
-cpuprofiler = "0.0.3"
+cpuprofiler = "0.0.4"
 ```
 
 Add the dependency to your root:
