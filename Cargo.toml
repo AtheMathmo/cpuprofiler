@@ -14,4 +14,4 @@ lazy_static = "1.0"
 error-chain = "0.12"
 
 [build-dependencies]
-pkg-config = "0.3"
+pkg-config = "0.3.17"
